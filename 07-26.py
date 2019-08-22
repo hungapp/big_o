@@ -33,17 +33,24 @@ print(c)
 
 
 # eko
+
+
 def totalWood(trees, height):
     wood = 0
-    for i in range(n):
-        wood += max(0, trees[i] - height)
+    i = 0
+    while trees[i] >= height:
+        wood += trees[i] - height
+        i += 1
+        if i == n:
+            break
     return wood
 
 
 n, m = map(int, input().split())
 trees = list(map(int, input().split()))
-left = min(trees)
-right = max(trees)
+trees.sort(reverse=True)
+left = 0
+right = trees[0]
 max_height = 0
 while left <= right:
     mid = (left + right) // 2
@@ -53,3 +60,5 @@ while left <= right:
     else:
         right = mid - 1
 print(max_height)
+
+
