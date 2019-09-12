@@ -152,3 +152,39 @@ for i in range(n):
     else:
         input()
 print('vulnerable' if is_vulnerable else 'non vulnerable')
+
+
+# contacts
+class Node:
+    def __init__(self):
+        self.child = dict()
+        self.contactCount = 0
+
+
+def addContact(root, s):
+    temp = root
+    for ch in s:
+        if ch not in temp.child:
+            temp.child[ch] = Node()
+        temp = temp.child[ch]
+        temp.contactCount += 1
+
+
+def findContact(root, s):
+    temp = root
+    for ch in s:
+        if ch not in temp.child:
+            return 0
+        temp = temp.child[ch]
+    return temp.contactCount
+
+
+n = int(input())
+root = Node()
+
+for i in range(n):
+    line = list(input().split())
+    if line[0] == 'add':
+        addContact(root, line[1])
+    else:
+        print(findContact(root, line[1]))
